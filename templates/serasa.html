@@ -30,9 +30,8 @@
     <label>Pontuação no Serasa (Score):</label>
     <input type="number" name="score" required><br><br>
 
-    <button type="submit" style="background: #008037; color: white; padding: 12px 20px; border: none; border-radius: 6px; font-weight: bold;">
-      🧾 Solicitar análise
-    </button>
+    <button type="submit" class="btn">📊 Simular e enviar para WhatsApp</button>
+
   </form>
 
   <div style="margin-top: 30px; background: #f1fff5; padding: 20px; border-radius: 10px; font-size: 14px;">
@@ -44,4 +43,27 @@
     </ul>
   </div>
 </div>
+
+<script>
+  function enviarSerasa() {
+    const nome = document.querySelector("[name='nome']").value;
+    const cpf = document.querySelector("[name='cpf']").value;
+    const telefone = document.querySelector("[name='telefone']").value;
+    const govbr = document.querySelector("[name='govbr']").value;
+    const divida = document.querySelector("[name='divida']").value;
+    const score = document.querySelector("[name='score']").value;
+
+    const msg = `Olá! Gostaria de limpar meu nome com a Fiel Crédito.%0A
+📌 *Nome:* ${nome}%0A
+📌 *CPF:* ${cpf}%0A
+📌 *WhatsApp:* ${telefone}%0A
+📌 *Tem acesso ao gov.br?* ${govbr}%0A
+📌 *Valor da dívida:* R$ ${divida}%0A
+📌 *Score atual:* ${score}`;
+
+    const link = `https://wa.me/5511986531008?text=${msg}`;
+    window.open(link, "_blank");
+  }
+</script>
+
 {% endblock %}

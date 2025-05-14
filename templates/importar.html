@@ -8,10 +8,21 @@
   <p style="text-align: center;">Faça upload de um arquivo .csv com as colunas:<br><strong>nome, telefone, cpf, produto</strong></p>
 
   <form method="POST" enctype="multipart/form-data">
-    <input type="file" name="arquivo" accept=".csv" required><br><br>
+    <input type="file" name="arquivo" accept=".csv,.xlsx" required><br><br>
     <button type="submit" style="background: #008037; color: white; padding: 12px 24px; border: none; border-radius: 6px; font-weight: bold;">
       Importar Leads
     </button>
+    <div style="background: #fff3cd; color: #856404; padding: 12px; border-radius: 6px; margin-bottom: 20px; border: 1px solid #ffeeba;">
+      ⚠️ <strong>Atenção:</strong> O arquivo deve conter as colunas na seguinte ordem para funcionar corretamente:
+      <ul style="margin-top: 5px;">
+        <li><strong>nome</strong></li>
+        <li><strong>telefone</strong> (somente números com DDD)</li>
+        <li><strong>cpf</strong></li>
+        <li><strong>servico</strong> (ex: FGTS, CLT, Serasa...)</li>
+      </ul>
+      Recomendado: formato <strong>.xlsx</strong> ou <strong>.csv</strong> com cabeçalhos exatos.
+    </div>
+    
   </form>
 </div>
 {% endblock %}

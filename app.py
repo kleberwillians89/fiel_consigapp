@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, redirect, session, url_for, send_file
 import json
 import csv
+import openpyxl
 from datetime import datetime
-from io import StringIO
+from io import StringIO, BytesIO
+from openpyxl import Workbook
 
 app = Flask(__name__)
 app.secret_key = 'fiel-super-secreto'
@@ -17,8 +19,30 @@ def home():
 @app.route('/fgts', methods=['GET', 'POST'])
 def fgts():
     if request.method == 'POST':
-        salvar_lead(request.form.to_dict(), 'Saque FGTS')
-        return redirect(url_for('confirmacao'))
+        dados = request.form.to_dict()
+        salvar_lead(dados, 'FGTS')
+
+        nome = dados.get('nome', '')
+        cpf = dados.get('cpf', '')
+        telefone = dados.get('telefone', '')
+        email = dados.get('email', '')
+        nascimento = dados.get('nascimento', '')
+        cidade = dados.get('cidade', '')
+        valor = dados.get('valor', '')
+
+        msg = f"""Olá! Gostaria de antecipar meu FGTS com a Fiel Crédito.
+📌 *Nome:* {nome}
+📌 *CPF:* {cpf}
+📌 *WhatsApp:* {telefone}
+📌 *E-mail:* {email}
+📌 *Nascimento:* {nascimento}
+📌 *Cidade:* {cidade}
+📌 *Valor solicitado:* R$ {valor}"""
+
+        msg = msg.replace("\n", "%0A")
+        link = f"https://wa.me/5511986531008?text={msg}"
+        return redirect(link)
+
     return render_template('fgts.html')
 
 @app.route('/portabilidade', methods=['GET', 'POST'])
@@ -31,33 +55,114 @@ def portabilidade():
 @app.route('/clt', methods=['GET', 'POST'])
 def clt():
     if request.method == 'POST':
-        salvar_lead(request.form.to_dict(), 'Empréstimo CLT')
-        return redirect(url_for('confirmacao_clt'))
+        dados = request.form.to_dict()
+        salvar_lead(dados, 'Empréstimo CLT')
+
+        nome = dados.get('nome', '')
+        cpf = dados.get('cpf', '')
+        telefone = dados.get('telefone', '')
+        empresa = dados.get('empresa', '')
+        salario = dados.get('salario', '')
+        tempo = dados.get('tempo_empresa', '')
+
+        msg = f"""Olá! Gostaria de fazer uma simulação de crédito CLT com a Fiel Crédito.
+📌 *Nome:* {nome}
+📌 *CPF:* {cpf}
+📌 *Telefone:* {telefone}
+📌 *Empresa:* {empresa}
+📌 *Último salário:* R$ {salario}
+📌 *Tempo de empresa:* {tempo} meses"""
+
+        msg = msg.replace("\n", "%0A")
+        link = f"https://wa.me/5511986531008?text={msg}"
+        return redirect(link)
+
     return render_template('clt.html')
 
 @app.route('/inss', methods=['GET', 'POST'])
 def inss():
     if request.method == 'POST':
-        salvar_lead(request.form.to_dict(), 'Empréstimo INSS')
-        return redirect(url_for('confirmacao_inss'))
+        dados = request.form.to_dict()
+        salvar_lead(dados, 'Empréstimo INSS')
+
+        nome = dados.get('nome', '')
+        cpf = dados.get('cpf', '')
+        telefone = dados.get('telefone', '')
+        valor = dados.get('valor', '')
+        parcela = dados.get('parcela', '')
+
+        msg = f"""Olá! Gostaria de contratar um empréstimo INSS com a Fiel Crédito.
+📌 *Nome:* {nome}
+📌 *CPF:* {cpf}
+📌 *WhatsApp:* {telefone}
+📌 *Valor desejado:* R$ {valor}
+📌 *Parcela pretendida:* R$ {parcela}
+📌 *Juros:* 1,80% a.m."""
+
+        msg = msg.replace("\n", "%0A")
+        link = f"https://wa.me/5511986531008?text={msg}"
+        return redirect(link)
+
     return render_template('inss.html')
 
 @app.route('/serasa', methods=['GET', 'POST'])
 def serasa():
     if request.method == 'POST':
-        salvar_lead(request.form.to_dict(), 'Serasa Limpa Nome')
-        return redirect(url_for('confirmacao_serasa'))
+        dados = request.form.to_dict()
+        salvar_lead(dados, 'Serasa Limpa Nome')
+
+        nome = dados.get('nome', '')
+        cpf = dados.get('cpf', '')
+        telefone = dados.get('telefone', '')
+        govbr = dados.get('govbr', '')
+        divida = dados.get('divida', '')
+        score = dados.get('score', '')
+
+        msg = f"""Olá! Gostaria de limpar meu nome com a Fiel Crédito.
+📌 *Nome:* {nome}
+📌 *CPF:* {cpf}
+📌 *WhatsApp:* {telefone}
+📌 *Tem acesso ao gov.br?* {govbr}
+📌 *Valor da dívida:* R$ {divida}
+📌 *Score atual:* {score}"""
+
+        msg = msg.replace("\n", "%0A")
+        link = f"https://wa.me/5511986531008?text={msg}"
+        return redirect(link)
+
     return render_template('serasa.html')
 
-@app.route('/chatbot')
+@app.route('/chatbot', methods=['GET', 'POST'])
 def chatbot():
+    if request.method == 'POST':
+        dados = request.form.to_dict()
+        salvar_lead(dados, 'Chatbot')
+        nome = dados.get('nome', '')
+        cpf = dados.get('cpf', '')
+        telefone = dados.get('telefone', '')
+        cidade = dados.get('cidade', '')
+        motivo = dados.get('motivo', '')
+
+        msg = f"""Olá! Acabei de preencher o formulário de atendimento da Fiel Crédito.
+📌 *Nome:* {nome}
+📌 *CPF:* {cpf}
+📌 *WhatsApp:* {telefone}
+📌 *Cidade:* {cidade}
+📌 *Motivo do contato:* {motivo}"""
+
+        msg = msg.replace("\n", "%0A")
+        link = f"https://wa.me/5511986531008?text={msg}"
+        return redirect(link)
+
     return render_template('chatbot.html')
+
+
 
 # ===================== CONFIRMAÇÕES ========================
 
 @app.route('/confirmacao')
 def confirmacao():
-    return render_template('confirmacao.html')  # FGTS
+    return render_template('confirmacao.html')
 
 @app.route('/confirmacao_portabilidade')
 def confirmacao_portabilidade():
@@ -117,10 +222,13 @@ def importar():
 
     if request.method == 'POST':
         arquivo = request.files['arquivo']
-        if arquivo.filename.endswith('.csv'):
+        nome_arquivo = arquivo.filename
+
+        lista = []
+
+        if nome_arquivo.endswith('.csv'):
             conteudo = arquivo.read().decode('utf-8').splitlines()
             leitor = csv.DictReader(conteudo)
-            lista = []
             for linha in leitor:
                 lista.append({
                     "nome": linha.get("nome", ""),
@@ -128,34 +236,64 @@ def importar():
                     "cpf": linha.get("cpf", ""),
                     "servico": linha.get("produto", "")
                 })
-            with open("importados.json", "w") as f:
-                json.dump(lista, f, indent=2)
-            return redirect(url_for('importados'))
+
+        elif nome_arquivo.endswith('.xlsx'):
+            planilha = openpyxl.load_workbook(arquivo)
+            aba = planilha.active
+            for i, linha in enumerate(aba.iter_rows(min_row=2, values_only=True)):
+                lista.append({
+                    "nome": linha[0],
+                    "telefone": str(linha[1]),
+                    "cpf": str(linha[2]),
+                    "servico": linha[3]
+                })
+
+        with open("importados.json", "w") as f:
+            json.dump(lista, f, indent=2)
+
+        return redirect(url_for('importados'))
 
     return render_template("importar.html")
 
-@app.route('/exportar-csv')
-def exportar_csv():
+@app.route('/exportar-xlsx')
+def exportar_xlsx():
     if not session.get('logado'):
         return redirect(url_for('login'))
 
-    leads = carregar_leads()
-    output = StringIO()
-    fieldnames = set()
-    for lead in leads:
-        fieldnames.update(lead.keys())
-    fieldnames = sorted(list(fieldnames))
+    try:
+        with open(LEADS_PATH, 'r') as f:
+            leads = json.load(f)
+    except:
+        leads = []
 
-    writer = csv.DictWriter(output, fieldnames=fieldnames)
-    writer.writeheader()
-    for lead in leads:
-        writer.writerow({k: lead.get(k, '') for k in fieldnames})
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Leads"
 
+    headers = ["Data", "Serviço", "Nome", "CPF", "Telefone", "E-mail", "Nascimento", "Cidade", "Valor"]
+    ws.append(headers)
+
+    for lead in leads:
+        ws.append([
+            lead.get("data", ""),
+            lead.get("servico", ""),
+            lead.get("nome", ""),
+            lead.get("cpf", ""),
+            lead.get("telefone", ""),
+            lead.get("email", ""),
+            lead.get("nascimento", ""),
+            lead.get("cidade", ""),
+            lead.get("valor", "")
+        ])
+
+    output = BytesIO()
+    wb.save(output)
     output.seek(0)
+
     return send_file(
         output,
-        mimetype='text/csv',
-        download_name='leads_fiel.csv',
+        mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        download_name='leads_fiel.xlsx',
         as_attachment=True
     )
 
@@ -178,5 +316,8 @@ def carregar_leads():
 
 # ===================== RODAR APP ========================
 
+import os
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port)

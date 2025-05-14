@@ -1,42 +1,35 @@
 {% extends 'base.html' %}
 
-{% block title %}Assistente Fiel - Tire suas dúvidas{% endblock %}
+{% block title %}Fale com a Fiel - Chatbot{% endblock %}
 
 {% block content %}
-<div style="max-width: 700px; margin: 50px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+<div style="max-width: 600px; margin: 50px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
 
-  <h2 style="text-align: center; color: #008037;">🤖 Assistente Fiel</h2>
-  <p style="text-align: center; color: #555;">Encontre respostas rápidas para as dúvidas mais comuns:</p>
+  <h2 style="text-align: center; color: #008037;">Fale com a Fiel Crédito</h2>
+  <p style="text-align: center; font-size: 15px; color: #555;">Preencha seus dados para iniciarmos a conversa no WhatsApp:</p>
 
-  <div style="margin-top: 30px;">
+  <form method="POST">
+    <label>Nome completo:</label>
+    <input type="text" name="nome" required><br><br>
 
-    <details style="margin-bottom: 20px;">
-      <summary style="font-weight: bold; font-size: 16px;">❓ Como autorizo o banco no App FGTS?</summary>
-      <p style="margin-top: 10px;">
-        Acesse o App FGTS, vá até “Saque-Aniversário” e selecione a opção “Autorizar Bancos”. Autorize o C6 Bank (ou parceiro da Fiel). Depois, volte aqui e envie seu CPF para simular.
-      </p>
-    </details>
+    <label>CPF:</label>
+    <input type="text" name="cpf" required><br><br>
 
-    <details style="margin-bottom: 20px;">
-      <summary style="font-weight: bold; font-size: 16px;">❓ Como funciona a portabilidade do meu empréstimo INSS?</summary>
-      <p style="margin-top: 10px;">
-        Nós quitamos seu contrato atual com o banco antigo e criamos um novo contrato com melhores taxas. Se houver saldo positivo, você recebe um <strong>troco</strong> em dinheiro. Tudo isso com refinanciamento em até 96x e juros de 1,80%.
-      </p>
-    </details>
+    <label>Telefone (WhatsApp):</label>
+    <input type="text" name="telefone" required><br><br>
 
-    <details style="margin-bottom: 20px;">
-      <summary style="font-weight: bold; font-size: 16px;">❓ Tenho score baixo. Posso contratar?</summary>
-      <p style="margin-top: 10px;">
-        Sim! Trabalhamos com modalidades que <strong>não exigem score alto</strong>. FGTS, Portabilidade e INSS são aprovados com base em saldo ou benefício, e não no nome limpo.
-      </p>
-    </details>
-  </div>
+    <label>Cidade / Estado:</label>
+    <input type="text" name="cidade" required><br><br>
 
-  <div style="text-align: center; margin-top: 40px;">
-    <a href="https://wa.me/5511986531008" target="_blank"
-       style="background: #25D366; color: white; padding: 14px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 16px;">
-      💬 Falar com a Fiel no WhatsApp
-    </a>
-  </div>
+    <label>Motivo do contato:</label>
+    <select name="motivo" required>
+      <option value="Dúvida">Dúvida</option>
+      <option value="Simulação">Simulação</option>
+      <option value="Outro">Outro</option>
+    </select><br><br>
+
+    <button type="submit" class="btn">📲 Iniciar conversa no WhatsApp</button>
+  </form>
 </div>
 {% endblock %}
+

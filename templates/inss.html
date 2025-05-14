@@ -27,9 +27,8 @@
     <label>Juros (pré-definido):</label>
     <input type="text" name="juros" value="1,80% a.m." readonly><br><br>
 
-    <button type="submit" style="background: #008037; color: white; padding: 12px 20px; border: none; border-radius: 6px; font-weight: bold;">
-      🧓 Simular Empréstimo
-    </button>
+    <button type="submit" class="btn">📊 Simular e enviar para WhatsApp</button>
+
   </form>
 
   <div style="margin-top: 30px; background: #f1fff5; padding: 20px; border-radius: 10px; font-size: 14px;">
@@ -41,4 +40,25 @@
     </ul>
   </div>
 </div>
+<script>
+  function enviarINSS() {
+    const nome = document.querySelector("[name='nome']").value;
+    const cpf = document.querySelector("[name='cpf']").value;
+    const telefone = document.querySelector("[name='telefone']").value;
+    const valor = document.querySelector("[name='valor']").value;
+    const parcela = document.querySelector("[name='parcela']").value;
+
+    const msg = `Olá! Gostaria de contratar um empréstimo INSS com a Fiel Crédito.%0A
+📌 *Nome:* ${nome}%0A
+📌 *CPF:* ${cpf}%0A
+📌 *WhatsApp:* ${telefone}%0A
+📌 *Valor desejado:* R$ ${valor}%0A
+📌 *Parcela pretendida:* R$ ${parcela}%0A
+📌 *Juros:* 1,80% a.m.`;
+
+    const link = `https://wa.me/5511986531008?text=${msg}`;
+    window.open(link, "_blank");
+  }
+</script>
+
 {% endblock %}
