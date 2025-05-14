@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Serasa Limpa Nome - Fiel Crédito{% endblock %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 50px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+
+  <h2 style="text-align: center; color: #008037;">Limpe seu nome com apoio da Fiel</h2>
+  <p style="text-align: center; font-size: 15px; color: #555;">Negocie suas dívidas com segurança e aumente seu score</p>
+
+  <form method="POST">
+    <label>Nome completo:</label>
+    <input type="text" name="nome" required><br><br>
+
+    <label>CPF:</label>
+    <input type="text" name="cpf" required><br><br>
+
+    <label>Telefone (WhatsApp):</label>
+    <input type="text" name="telefone" required><br><br>
+
+    <label>Você tem acesso ao gov.br?</label>
+    <select name="govbr" required>
+      <option value="Sim">Sim</option>
+      <option value="Não">Não</option>
+    </select><br><br>
+
+    <label>Valor da dívida (R$):</label>
+    <input type="number" step="0.01" name="divida" required><br><br>
+
+    <label>Pontuação no Serasa (Score):</label>
+    <input type="number" name="score" required><br><br>
+
+    <button type="submit" style="background: #008037; color: white; padding: 12px 20px; border: none; border-radius: 6px; font-weight: bold;">
+      🧾 Solicitar análise
+    </button>
+  </form>
+
+  <div style="margin-top: 30px; background: #f1fff5; padding: 20px; border-radius: 10px; font-size: 14px;">
+    <p><strong>Vantagens do Limpa Nome:</strong></p>
+    <ul style="padding-left: 20px; margin-top: 10px;">
+      <li>📈 Aumento real do seu score</li>
+      <li>📜 Redução e quitação de dívidas</li>
+      <li>🔒 Tratativa segura e acompanhada</li>
+    </ul>
+  </div>
+</div>
+{% endblock %}

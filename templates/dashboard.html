@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Painel de Leads - Fiel Crédito{% endblock %}
+
+{% block content %}
+<div style="max-width: 1200px; margin: 40px auto; padding: 20px; background: #fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1);">
+
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+    <h2 style="color: #008037;">📋 Painel de Leads</h2>
+    <a href="/exportar-csv" style="background: #520057; color: white; padding: 10px 16px; border-radius: 6px; text-decoration: none; font-size: 14px;">
+      ⬇️ Baixar CSV
+    </a>
+    <a href="/importar" style="background: #008037; color: white; padding: 8px 12px; border-radius: 6px; text-decoration: none; font-size: 14px; margin-bottom: 20px; display: inline-block;">
+      📤 Importar Contatos
+    </a>
+    
+  </div>
+
+  <p style="margin-top: 5px;">Total de cadastros: <strong>{{ leads|length }}</strong></p>
+
+  <div style="overflow-x: auto;">
+    <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+      <thead style="background-color: #f3e1f7; color: #520057;">
+        <tr>
+          <th style="padding: 12px;">Data</th>
+          <th>Serviço</th>
+          <th>Nome</th>
+          <th>CPF</th>
+          <th>Telefone</th>
+          <th>E-mail</th>
+          <th>Nascimento</th>
+          <th>Cidade</th>
+          <th>Valor</th>
+          <th>Disparo</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for lead in leads %}
+        <tr style="background-color: {% if loop.index0 % 2 == 0 %}#f9f9f9{% else %}#fff{% endif %};">
+          <td style="padding: 10px;">{{ lead.data or '' }}</td>
+          <td>{{ lead.servico or '' }}</td>
+          <td>{{ lead.nome or '' }}</td>
+          <td>{{ lead.cpf or '' }}</td>
+          <td>{{ lead.telefone or '' }}</td>
+          <td>{{ lead.email or '' }}</td>
+          <td>{{ lead.nascimento or '' }}</td>
+          <td>{{ lead.cidade or '' }}</td>
+          <td>{{ lead.valor or '' }}</td>
+          <td>
+            {% if lead.telefone %}
+            <a href="https://wa.me/55{{ lead.telefone | replace(' ', '') | replace('-', '') }}?text=Olá%20{{ lead.nome }}%2C%20tudo%20bem%3F%20Clique%20aqui%20para%20simular%20sua%20proposta%20na%20Fiel%20Crédito%3A%20https%3A%2F%2Ffielcredito.com.br"
+               target="_blank" style="color: #25D366; font-weight: bold;">📤 Enviar</a>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

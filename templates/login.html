@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Login - Fiel Crédito{% endblock %}
+
+{% block content %}
+<div style="max-width: 400px; margin: 100px auto; background: #fff; padding: 30px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); text-align: center;">
+  <h2 style="color: #008037;">Acesso ao Painel</h2>
+  <form method="POST">
+    <label>Senha de acesso:</label>
+    <input type="password" name="senha" required><br><br>
+    <button type="submit" style="background: #008037; color: white; padding: 10px 20px; border: none; border-radius: 6px; font-weight: bold;">Entrar</button>
+  </form>
+</div>
+{% endblock %}

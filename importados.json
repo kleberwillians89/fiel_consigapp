@@ -1,0 +1,17 @@
+[
+  {
+    "nome": "João da Silva",
+    "telefone": "11999998888",
+    "servico": "FGTS"
+  },
+  {
+    "nome": "Maria Oliveira",
+    "telefone": "11988887777",
+    "servico": "Portabilidade INSS"
+  },
+  {
+    "nome": "Carlos Santos",
+    "telefone": "11977776666",
+    "servico": "Empréstimo CLT"
+  }
+]

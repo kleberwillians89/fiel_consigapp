@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Leads - Fiel Crédito{% endblock %}
+
+{% block content %}
+  <h1>Leads recebidos</h1>
+  <table style="width: 100%; border-collapse: collapse; margin-top: 20px; background: white;">
+    <tr style="background-color: #f3e1f7; color: #520057;">
+      <th style="padding: 12px; border: 1px solid #ddd;">Data</th>
+      <th style="padding: 12px; border: 1px solid #ddd;">Nome</th>
+      <th style="padding: 12px; border: 1px solid #ddd;">CPF</th>
+      <th style="padding: 12px; border: 1px solid #ddd;">Telefone</th>
+      <th style="padding: 12px; border: 1px solid #ddd;">E-mail</th>
+      <th style="padding: 12px; border: 1px solid #ddd;">Nascimento</th>
+      <th style="padding: 12px; border: 1px solid #ddd;">Cidade</th>
+      <th style="padding: 12px; border: 1px solid #ddd;">Valor</th>
+    </tr>
+    {% for lead in leads %}
+    <tr style="background-color: {% if loop.index0 % 2 == 0 %}#f9f9f9{% else %}#fff{% endif %};">
+      <td style="padding: 10px; border: 1px solid #ddd;">{{ lead.data[:10] }}</td>
+      <td style="padding: 10px; border: 1px solid #ddd;">{{ lead.nome }}</td>
+      <td style="padding: 10px; border: 1px solid #ddd;">{{ lead.cpf }}</td>
+      <td style="padding: 10px; border: 1px solid #ddd;">{{ lead.telefone }}</td>
+      <td style="padding: 10px; border: 1px solid #ddd;">{{ lead.email }}</td>
+      <td style="padding: 10px; border: 1px solid #ddd;">{{ lead.nascimento }}</td>
+      <td style="padding: 10px; border: 1px solid #ddd;">{{ lead.cidade }}</td>
+      <td style="padding: 10px; border: 1px solid #ddd;">{{ lead.valor }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
+

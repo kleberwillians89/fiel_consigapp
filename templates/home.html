@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Fiel Crédito - Plataforma de Soluções{% endblock %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 40px auto; padding: 30px; background: #ffffff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); text-align: center;">
+
+  <img src="{{ url_for('static', filename='logo-fiel.png') }}" alt="Fiel Crédito" style="max-width: 180px; margin-bottom: 20px;">
+
+
+  <h1 style="color: #008037; font-size: 24px; margin-bottom: 10px;">Bem-vindo à Fiel Crédito</h1>
+  <p style="font-size: 15px; color: #555;">
+    Aqui você encontra soluções completas para antecipação de FGTS, portabilidade INSS, empréstimo consignado, crédito CLT e negociação de dívidas Serasa.
+    <br><br>
+    A aprovação do saque FGTS depende do seu saldo, com liberação a partir de <strong>R$40,00</strong> em até <strong>30 minutos</strong> após assinatura do contrato.
+  </p>
+  <div style="margin-top: 30px; display: flex; flex-direction: column; gap: 15px;">
+    <a href="/fgts" class="btn-fiel">💰 Saque FGTS</a>
+    <a href="/portabilidade" class="btn-fiel">📊 Portabilidade INSS</a>
+    <a href="/clt" class="btn-fiel">💼 Empréstimo CLT</a>
+    <a href="/inss" class="btn-fiel">🧓 Empréstimo INSS</a>
+    <a href="/serasa" class="btn-fiel">🧾 Serasa Limpa Nome</a>
+    <a href="https://wa.me/5511986531008" target="_blank" class="btn-fiel" style="background-color: #25D366;">🤖 Fale com a Fiel (WhatsApp)</a>
+    <a href="https://app.lotusmais.com.br/self-hiring/maic4com8w1w" target="_blank" class="btn-fiel" style="background-color: #520057;">🚀 Já é cliente FGTS? Clique aqui e simule na plataforma do banco</a>
+  </div>
+</div>
+
+<style>
+  .btn-fiel {
+    display: block;
+    padding: 14px;
+    text-decoration: none;
+    color: white;
+    background-color: #008037;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    transition: background 0.3s ease;
+  }
+  .btn-fiel:hover {
+    background-color: #005e2b;
+  }
+</style>
+{% endblock %}
