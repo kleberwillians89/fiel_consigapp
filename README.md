@@ -1,33 +1,17 @@
-# Fiel Crédito 💰
+# Fiel Crédito
 
-Uma plataforma completa para captação e ativação de leads para crédito consignado, FGTS, INSS, CLT e Serasa Limpa Nome.
+Sistema completo para captação de leads, ativação via WhatsApp e painel de administração para operações de crédito: FGTS, INSS, CLT e Limpa Nome.
 
----
+## Funcionalidades
+- Formulários públicos por tipo de operação
+- Botão de disparo automático via WhatsApp
+- Painel de leads com exportação
+- Importação via CSV
+- Gráfico de leads por tipo de serviço
 
-## 🚀 Funcionalidades
-
-- Formulários públicos para FGTS, INSS, CLT, Serasa e Portabilidade
-- Botão automático para envio via WhatsApp
-- Painel administrativo com login e exportação de leads
-- Dashboard com resumo por tipo de serviço
-- Upload de CSV com leads externos
-- Visual moderno, responsivo e com identidade Fiel Crédito
-
----
-
-## 💻 Tecnologias
-
-- Flask + HTML/CSS
-- Botão WhatsApp via link dinâmico
-- JSON como banco de dados local
-- Chart.js para visualização de estatísticas
-
----
-
-## 🛠 Como rodar localmente
+## Como rodar localmente
 
 ```bash
-git clone https://github.com/kleberwillians89/fiel_consigapp.git
-cd fiel-credito
 pip install -r requirements.txt
 python app.py
+
